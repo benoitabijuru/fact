@@ -2,7 +2,7 @@
 import { withUt } from 'uploadthing/tw';
 
 module.exports = withUt({
-  darkMode: ['class'],
+  
   content: [
     './pages/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
@@ -67,7 +67,9 @@ module.exports = withUt({
         },
       },
       fontFamily: {
-        poppins: ['var(--font-poppins)'],
+        'sf-pro': ['var(--font-sf-pro)', 'var(--font-sf-system)', '-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'SF Pro Text', 'system-ui', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+        'sf-system': ['var(--font-sf-system)', '-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'SF Pro Text', 'system-ui', 'sans-serif'],
+        'sans': ['var(--font-sf-pro)', 'var(--font-sf-system)', '-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'SF Pro Text', 'system-ui', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
       },
       backgroundImage: {
         'dotted-pattern': "url('/assets/images/dotted-pattern.png')",

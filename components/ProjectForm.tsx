@@ -129,8 +129,7 @@ const CreateProjectForm = ({ type, project }: ProjectFormProps) => {
   };
 
   const onSubmit = async (values: ProjectFormData) => {
-    setSubmitStatus('idle');
-
+    
    
 
       // Upload cover image
@@ -175,8 +174,6 @@ const CreateProjectForm = ({ type, project }: ProjectFormProps) => {
         projectPhotos: updatedPhotos,
         projectDiagrams: updatedDiagrams
       };
-
-      console.log('Final project data:', projectData);
     if (type === 'Create'){
        try {
         const newProject = await createProject(projectData);
