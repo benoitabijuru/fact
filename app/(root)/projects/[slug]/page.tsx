@@ -1,10 +1,33 @@
-import React from 'react'
+import ProjectDetailView from '@/components/ProjectDetailsView';
+import { getProjectBySlug, getAllProjects } from '@/lib/actions/project.actions';
 
-const page = () => {
+import { notFound } from 'next/navigation';
+
+export default async function ProjectPage({
+  params,
+}: {
+  params: { slug: string }
+}) {
+
+  // Await params before accessing its properties
+  const resolvedParams = await params;
+  // Get the specific project
+  const project = await getProjectBySlug(resolvedParams.slug);
+  
+  if (!project) {
+    notFound();
+  }
+
+  // Get all projects for navigation (optional)
+  const allProjects = await getAllProjects({
+    query: '',
+    category: '',
+  });
+
   return (
-    <div>New project created</div>
-  )
+    <ProjectDetailView
+      project={project} 
+      allProjects={allProjects || []} 
+    />
+  );
 }
-
-export default page
-

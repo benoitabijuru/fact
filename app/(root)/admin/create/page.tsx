@@ -5,7 +5,7 @@ const page = () => {
   return (
     <div>
         <h2>Add new project design</h2>
-        <CreateProjectForm type="create" />
+        <CreateProjectForm type="Create" />
     </div>
   )
 }

@@ -9,6 +9,7 @@ interface CachedConnection {
 }
 
 // Initialize cached object properly
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const cached: CachedConnection = (global as any).mongoose || { conn: null, promise: null };
 
 export const connectToDatabase = async () => {
@@ -42,6 +43,7 @@ export const connectToDatabase = async () => {
     cached.conn = await cached.promise;
     
     // Store in global for reuse
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (global as any).mongoose = cached;
     
     console.log('Successfully connected to MongoDB');

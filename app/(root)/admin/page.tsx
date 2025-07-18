@@ -3,7 +3,7 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import { 
   BarChart3, 
-  Users, 
+ 
   Settings, 
   FileText, 
   Bell, 
@@ -11,32 +11,13 @@ import {
   Menu, 
   X, 
   Home,
-  ShoppingCart,
-  TrendingUp,
-  Eye,
+ 
   Plus,
   Filter,
   FolderPlus,
-  Building
+ 
 } from 'lucide-react';
 
-interface User {
-  id: number;
-  name: string;
-  email: string;
-  role: string;
-  status: 'active' | 'inactive';
-  avatar: string;
-}
-
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-  stock: number;
-  category: string;
-  status: 'active' | 'inactive';
-}
 
 const AdminPanel: React.FC = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -76,6 +57,7 @@ const AdminPanel: React.FC = () => {
     </div>
   );
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const renderUsers = () => (
     <div className="space-y-6">
       <div className="flex justify-between items-center">

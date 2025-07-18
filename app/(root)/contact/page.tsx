@@ -1,6 +1,7 @@
 'use client'
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Send, User, MessageSquare, Youtube, Instagram, Twitter, Linkedin } from 'lucide-react';
+import Image from 'next/image';
 
 interface FormData {
   name: string;
@@ -61,7 +62,7 @@ const ContactForm: React.FC = () => {
             <Send className="w-8 h-8 text-black" />
           </div>
           <h2 className="text-2xl font-bold text-white mb-2">Message Sent!</h2>
-          <p className="text-gray-300">Thank you for reaching out. We'll get back to you soon.</p>
+          <p className="text-gray-300">Thank you for reaching out. We&apos;ll get back to you soon.</p>
         </div>
       </div>
     );
@@ -83,10 +84,12 @@ const ContactForm: React.FC = () => {
             {/* Left Column - Image */}
             <div className="lg:col-span-1">
               <div className="bg-gradient-to-br from-gray-100 to-white rounded-2xl p-4 border border-gray-200 hover:border-gray-300 transition-all duration-300 transform hover:scale-105 h-full">
-                <img 
-                  src="https://cdn.create.vista.com/api/media/medium/285780842/stock-photo-selective-focus-cheerful-blonde-operator-headset-looking-camera?token=" 
+                <Image
+                  src="" 
                   alt="Customer Service Representative" 
                   className="w-full h-full object-cover rounded-xl shadow-lg"
+                  width={500}
+                  height={500}
                 />
               </div>
             </div>
@@ -99,7 +102,7 @@ const ContactForm: React.FC = () => {
                   Get in Touch
                 </h1>
                 <p className="text-lg text-gray-600 max-w-lg mx-auto">
-                  We'd love to hear from you. Send us a message and we'll respond as soon as possible.
+                  We&apos;d love to hear from you. Send us a message and we&apos;ll respond as soon as possible.
                 </p>
               </div>
               

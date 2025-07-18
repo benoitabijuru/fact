@@ -18,6 +18,11 @@ export type SearchParamProps = {
   searchParams: { [key: string]: string | string[] | undefined }
 }
 
+export type  GetAllProjectsParams = {
+  query: string
+  category: string
+}
+
 export interface CreateProjectParams {
   projectName: string;
   coverImage: string;
@@ -28,17 +33,17 @@ export interface CreateProjectParams {
   status: 'idea' | 'progress' | 'completed';
   projectSize?: string;
   clientName?: string;
-  projectPhotos?: {
+  projectPhotos?: Array<{
     url: string;
     description: string;
     alt_text?: string;
     order?: number;
-  }[];
-  projectDiagrams?: {
+  }>;
+  projectDiagrams?: Array<{
     url: string;
     description: string;
     diagram_type?: 'floor_plan' | 'elevation' | 'section' | 'detail' | 'site_plan' | 'concept' | 'other';
     alt_text?: string;
     order?: number;
-  }[];
+  }>;
 }

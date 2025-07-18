@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 import TopBar from "@/components/TopBar";
 import Footer from "@/components/Footer";
+import {
+  ClerkProvider,
+} from '@clerk/nextjs'
 
 export const metadata: Metadata = {
   title: "Fact ltd",
@@ -14,7 +17,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="">
+    <ClerkProvider>
+       <html lang="en" className="">
       <body
         className="antialiased flex flex-col font-sf-pro"
         style={{
@@ -33,5 +37,7 @@ export default function RootLayout({
         <Footer />
       </body>
     </html>
+    </ClerkProvider>
+   
   );
 }

@@ -1,5 +1,4 @@
 "use client"
-
 import React, { useState } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -26,7 +25,6 @@ import { useUploadThing } from '@/lib/uploadthing';
 import { createProject } from '@/lib/actions/project.actions';
 import { IProject } from '@/lib/database/models/project.model';
 import Dropdown from './Dropdown';
-
 
 // Zod validation schema
 const projectPhotoSchema = z.object({
@@ -79,6 +77,8 @@ const diagramTypes = [
 const CreateProjectForm = ({ type, project }: ProjectFormProps) => {
   const router = useRouter();
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [submitError, setSubmitError] = useState<string>('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   
   // File upload states
   const [coverImageFiles, setCoverImageFiles] = useState<File[]>([]);
@@ -95,13 +95,14 @@ const CreateProjectForm = ({ type, project }: ProjectFormProps) => {
       projectDescription: project?.project_description || '',
       location: project?.location || '',
       year: project?.year || new Date().getFullYear(),
-      categoryId: project?.categoryId || '',
+      categoryId: project?.category || "",
       status: project?.status || 'idea',
       projectSize: project?.project_size || '',
       clientName: project?.client_name || '',
       projectPhotos: project?.project_photos || [],
-      projectDiagrams: project?.project_diagrams || []
-    }
+      projectDiagrams: project?.project_diagrams || [],
+    },
+    mode: 'onChange' // This will validate on change to show errors immediately
   });
 
   const { fields: photoFields, append: appendPhoto, remove: removePhoto } = useFieldArray({
@@ -114,55 +115,101 @@ const CreateProjectForm = ({ type, project }: ProjectFormProps) => {
     name: 'projectDiagrams'
   });
 
-  const uploadImages = async (files: File[]) => {
+  const uploadImages = async (files: File[]): Promise<string[]> => {
     if (files.length === 0) return [];
     
     try {
+      console.log('Starting upload for files:', files);
       const uploadedImages = await startUpload(files);
-      if (!uploadedImages) return [];
+      console.log('Upload result:', uploadedImages);
+      
+      if (!uploadedImages) {
+        console.error('Upload failed: no images returned');
+        throw new Error('Upload failed: no images returned');
+      }
       
       return uploadedImages.map(img => img.url);
     } catch (error) {
       console.error('Error uploading images:', error);
-      return [];
+      throw error;
     }
   };
 
   const onSubmit = async (values: ProjectFormData) => {
+    console.log('=== FORM SUBMISSION STARTED ===');
+    console.log('Form values:', values);
+    console.log('Form errors:', form.formState.errors);
+    console.log('Form is valid:', form.formState.isValid);
     
-   
+    // Reset states
+    setSubmitStatus('idle');
+    setSubmitError('');
+    setIsSubmitting(true);
 
+    try {
+      // Validate form manually
+      const isValid = await form.trigger();
+      console.log('Manual validation result:', isValid);
+      
+      if (!isValid) {
+        console.log('Form validation failed');
+        setSubmitError('Please fix the validation errors before submitting.');
+        setSubmitStatus('error');
+        setIsSubmitting(false);
+        return;
+      }
+
+      console.log('Starting image uploads...');
+      
       // Upload cover image
       let uploadedCoverImageUrl = values.coverImage;
       if (coverImageFiles.length > 0) {
         console.log('Uploading cover image...');
-        const coverUrls = await uploadImages(coverImageFiles);
-        if (coverUrls.length > 0) {
-          uploadedCoverImageUrl = coverUrls[0];
+        try {
+          const coverUrls = await uploadImages(coverImageFiles);
+          if (coverUrls.length > 0) {
+            uploadedCoverImageUrl = coverUrls[0];
+            console.log('Cover image uploaded successfully:', uploadedCoverImageUrl);
+          }
+        } catch (error) {
+          console.error('Cover image upload failed:', error);
+          throw new Error('Failed to upload cover image');
         }
       }
 
       // Upload project photos
+      console.log('Uploading project photos...');
       const updatedPhotos = await Promise.all(
         values.projectPhotos?.map(async (photo, index) => {
           const files = photoFiles[index] || [];
           if (files.length > 0) {
             console.log(`Uploading photo ${index + 1}...`);
-            const urls = await uploadImages(files);
-            return { ...photo, url: urls[0] || photo.url };
+            try {
+              const urls = await uploadImages(files);
+              return { ...photo, url: urls[0] || photo.url };
+            } catch (error) {
+              console.error(`Photo ${index + 1} upload failed:`, error);
+              throw new Error(`Failed to upload photo ${index + 1}`);
+            }
           }
           return photo;
         }) || []
       );
 
       // Upload project diagrams
+      console.log('Uploading project diagrams...');
       const updatedDiagrams = await Promise.all(
         values.projectDiagrams?.map(async (diagram, index) => {
           const files = diagramFiles[index] || [];
           if (files.length > 0) {
             console.log(`Uploading diagram ${index + 1}...`);
-            const urls = await uploadImages(files);
-            return { ...diagram, url: urls[0] || diagram.url };
+            try {
+              const urls = await uploadImages(files);
+              return { ...diagram, url: urls[0] || diagram.url };
+            } catch (error) {
+              console.error(`Diagram ${index + 1} upload failed:`, error);
+              throw new Error(`Failed to upload diagram ${index + 1}`);
+            }
           }
           return diagram;
         }) || []
@@ -174,27 +221,58 @@ const CreateProjectForm = ({ type, project }: ProjectFormProps) => {
         projectPhotos: updatedPhotos,
         projectDiagrams: updatedDiagrams
       };
-    if (type === 'Create'){
-       try {
-        const newProject = await createProject(projectData);
 
-        if(newProject){
-        console.log('New project created:', newProject);
-        setSubmitStatus('success');
-        router.push(`/projects/${newProject.slug}`);
-        } 
-      } catch (error) {
-        console.log(error)
+      console.log('Final project data:', projectData);
+      
+      if (type === 'Create') {
+        console.log('Creating new project...');
+        try {
+          const newProject = await createProject(projectData);
+          console.log('Create project result:', newProject);
+
+          if (newProject) {
+            console.log('New project created successfully:', newProject);
+            setSubmitStatus('success');
+            
+            // Small delay to show success message
+            setTimeout(() => {
+              router.push(`/projects/${newProject.slug}`);
+            }, 1000);
+          } else {
+            console.error('Create project returned null/undefined');
+            setSubmitError('Failed to create project. Please try again.');
+            setSubmitStatus('error');
+          }
+        } catch (error) {
+          console.error('Error creating project:', error);
+          setSubmitError(error instanceof Error ? error.message : 'Failed to create project');
+          setSubmitStatus('error');
+        }
       }
-    } 
+    } catch (error) {
+      console.error('Error in onSubmit:', error);
+      setSubmitError(error instanceof Error ? error.message : 'An unexpected error occurred');
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+      console.log('=== FORM SUBMISSION ENDED ===');
+    }
   };
 
   const handlePhotoFileChange = (files: File[], index: number) => {
+    console.log(`Photo files changed for index ${index}:`, files);
     setPhotoFiles(prev => ({ ...prev, [index]: files }));
   };
 
   const handleDiagramFileChange = (files: File[], index: number) => {
+    console.log(`Diagram files changed for index ${index}:`, files);
     setDiagramFiles(prev => ({ ...prev, [index]: files }));
+  };
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    console.log('Form submit event triggered');
+    e.preventDefault();
+    form.handleSubmit(onSubmit)(e);
   };
 
   return (
@@ -211,7 +289,7 @@ const CreateProjectForm = ({ type, project }: ProjectFormProps) => {
             <Alert className="mb-6 border-green-200 bg-green-50">
               <CheckCircle2 className="h-4 w-4 text-green-600" />
               <AlertDescription className="text-green-800">
-                Project {type}d successfully!
+                Project {type.toLowerCase()}d successfully! Redirecting...
               </AlertDescription>
             </Alert>
           )}
@@ -220,13 +298,24 @@ const CreateProjectForm = ({ type, project }: ProjectFormProps) => {
             <Alert className="mb-6 border-red-200 bg-red-50">
               <AlertCircle className="h-4 w-4 text-red-600" />
               <AlertDescription className="text-red-800">
-                Failed to {type} project. Please try again.
+                {submitError || `Failed to ${type.toLowerCase()} project. Please try again.`}
+              </AlertDescription>
+            </Alert>
+          )}
+
+          {/* Debug Information (remove in production) */}
+          {process.env.NODE_ENV === 'development' && (
+            <Alert className="mb-6 border-blue-200 bg-blue-50">
+              <AlertDescription className="text-blue-800 text-sm">
+                <strong>Debug Info:</strong> Form valid: {form.formState.isValid ? 'Yes' : 'No'}, 
+                Errors: {Object.keys(form.formState.errors).length}, 
+                Submitting: {isSubmitting ? 'Yes' : 'No'}
               </AlertDescription>
             </Alert>
           )}
 
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <form onSubmit={handleFormSubmit} className="space-y-8">
               
               {/* Basic Information Section */}
               <div className="space-y-6">
@@ -272,7 +361,10 @@ const CreateProjectForm = ({ type, project }: ProjectFormProps) => {
                             type="number"
                             placeholder="Enter project year"
                             {...field}
-                            onChange={(e) => field.onChange(parseInt(e.target.value))}
+                            onChange={(e) => {
+                              const value = e.target.value;
+                              field.onChange(value === '' ? undefined : parseInt(value));
+                            }}
                             className="input-field"
                           />
                         </FormControl>
@@ -601,11 +693,12 @@ const CreateProjectForm = ({ type, project }: ProjectFormProps) => {
               <div className="flex justify-end pt-8 border-t">
                 <Button
                   type="submit"
-                  disabled={form.formState.isSubmitting}
+                  disabled={isSubmitting}
                   className="button col-span-2"
                   size="lg"
+                  onClick={() => console.log('Submit button clicked')}
                 >
-                  {form.formState.isSubmitting ? `${type}ing Project...` : `${type} Project`}
+                  {isSubmitting ? `${type}ing Project...` : `${type} Project`}
                 </Button>
               </div>
             </form>

@@ -25,7 +25,7 @@ export interface IProject extends Document {
   project_description: string;
   location: string;
   year: number;
-  category: { _id: string; name: string } | string;
+  category: { _id: string; name: string };
   status: 'idea' | 'progress' | 'completed';
   project_size?: string;
   client_name?: string;

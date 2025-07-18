@@ -119,7 +119,7 @@ const Dropdown = ({ value, onChangeHandler }: DropdownProps) => {
 
         <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <AlertDialogTrigger 
-            className="p-medium-14 flex w-full rounded-sm py-3 pl-8 text-primary-500 hover:bg-primary-50 focus:text-primary-500"
+            className="p-medium-14 flex w-full rounded-sm py-3 pl-8 text-primary-500 hover:bg-primary-50 focus:text-primary-500 z-10"
             onClick={() => setIsDialogOpen(true)}
           >
             Add new category
