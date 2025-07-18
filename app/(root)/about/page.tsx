@@ -1,6 +1,7 @@
 'use client'
 import React from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 const AboutUsPage = () => {
   // Enhanced smooth animations with longer durations and smoother easing
@@ -99,9 +100,11 @@ const AboutUsPage = () => {
             variants={scaleIn}
             animate={floatingAnimation}
           >
-            <img 
+            <Image 
               src="https://massdesigngroup.org/sites/default/files/styles/hero/public/2021-03/1804_N41_medium.jpg?itok=t2x8Ivhd" 
               alt="Modern architectural design"
+              width={1200}
+              height={500}
               className="w-full h-96 md:h-[500px] object-cover rounded-lg shadow-2xl transition-all duration-700 hover:shadow-3xl"
             />
             <div className="absolute inset-0 bg-opacity-10 rounded-lg transition-all duration-500"></div>
@@ -168,13 +171,18 @@ const AboutUsPage = () => {
             className="relative"
             variants={slideInRight}
           >
-            <motion.img 
-              src="https://massdesigngroup.org/sites/default/files/styles/flow_small/public/2024-07/1813_N601_indd.jpg?itok=lKmW2B3p" 
-              alt="Architectural interior design"
-              className="w-full h-96 md:h-[500px] object-cover rounded-lg shadow-xl transition-all duration-700 hover:shadow-2xl"
+            <motion.div
+              className="relative w-full h-96 md:h-[500px]"
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
-            />
+            >
+              <Image 
+                src="https://massdesigngroup.org/sites/default/files/styles/flow_small/public/2024-07/1813_N601_indd.jpg?itok=lKmW2B3p" 
+                alt="Architectural interior design"
+                fill
+                className="object-cover rounded-lg shadow-xl transition-all duration-700 hover:shadow-2xl"
+              />
+            </motion.div>
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-lg transition-all duration-500"></div>
           </motion.div>
         </div>
@@ -220,7 +228,7 @@ const AboutUsPage = () => {
             whileInView={{ opacity: [0, 1], y: [30, 0] }}
             transition={{ duration: 1.2, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
-            Our journey began with a simple residential project that challenged conventional design thinking. This early success taught us that true architectural excellence comes from understanding our clients' deepest needs and translating them into spaces that exceed expectations.
+            Our journey began with a simple residential project that challenged conventional design thinking. This early success taught us that true architectural excellence comes from understanding our clients&apos; deepest needs and translating them into spaces that exceed expectations.
           </motion.p>
           
           <motion.p 
@@ -305,13 +313,18 @@ const AboutUsPage = () => {
             className="relative order-2 md:order-1"
             variants={slideInLeft}
           >
-            <motion.img 
-              src="https://massdesigngroup.org/sites/default/files/styles/flow_small/public/2024-07/1813_N601_indd.jpg?itok=lKmW2B3p" 
-              alt="Architectural workspace and design process"
-              className="w-full h-96 md:h-[500px] object-cover rounded-lg shadow-xl transition-all duration-700 hover:shadow-2xl"
+            <motion.div
+              className="relative w-full h-96 md:h-[500px]"
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
-            />
+            >
+              <Image 
+                src="https://massdesigngroup.org/sites/default/files/styles/flow_small/public/2024-07/1813_N601_indd.jpg?itok=lKmW2B3p" 
+                alt="Architectural workspace and design process"
+                fill
+                className="object-cover rounded-lg shadow-xl transition-all duration-700 hover:shadow-2xl"
+              />
+            </motion.div>
             <div className="absolute inset-0 bg-gradient-to-br from-black/10 to-transparent rounded-lg transition-all duration-500"></div>
           </motion.div>
           
@@ -396,7 +409,7 @@ const AboutUsPage = () => {
               whileHover={smoothHover}
             >
               <motion.div 
-                className="w-48 h-48 bg-gray-100 rounded-full mx-auto mb-6 flex items-center justify-center transition-all duration-500 hover:bg-gray-200"
+                className="w-48 h-48 bg-gray-100 rounded-full mx-auto mb-6 flex items-center justify-content-center transition-all duration-500 hover:bg-gray-200"
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
               >
@@ -487,7 +500,7 @@ const AboutUsPage = () => {
             }}
           />
           <p className="text-lg text-gray-700 max-w-2xl mx-auto leading-relaxed mb-12">
-            Let's discuss your vision and explore how we can transform your space into something truly remarkable.
+            Let&apos;s discuss your vision and explore how we can transform your space into something truly remarkable.
           </p>
           <motion.button 
             className="bg-black text-white px-8 py-4 text-lg font-light hover:bg-gray-800 transition-all duration-500 shadow-lg hover:shadow-xl"

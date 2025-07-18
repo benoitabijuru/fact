@@ -565,7 +565,7 @@ const CreateProjectForm = ({ type, project }: ProjectFormProps) => {
                   <div className="text-center py-12 text-gray-500">
                     <Plus className="w-16 h-16 mx-auto mb-4 opacity-50" />
                     <p className="text-lg mb-2">No photos added yet</p>
-                    <p className="text-sm">Click "Add Photo" to get started</p>
+                    <p className="text-sm">Click &quot;Add Photo&quot; to get started</p>
                   </div>
                 )}
               </div>
@@ -684,7 +684,7 @@ const CreateProjectForm = ({ type, project }: ProjectFormProps) => {
                   <div className="text-center py-12 text-gray-500">
                     <Plus className="w-16 h-16 mx-auto mb-4 opacity-50" />
                     <p className="text-lg mb-2">No diagrams added yet</p>
-                    <p className="text-sm">Click "Add Diagram" to get started</p>
+                    <p className="text-sm">Click &quot;Add Diagram&quot; to get started</p>
                   </div>
                 )}
               </div>
