@@ -1,16 +1,16 @@
 import ProjectDetailView from '@/components/ProjectDetailsView';
 import { getProjectBySlug, getAllProjects } from '@/lib/actions/project.actions';
-
 import { notFound } from 'next/navigation';
 
-export default async function ProjectPage({
-  params,
-}: {
-  params: { slug: string }
-}) {
+// Define the correct type for Next.js 15 params
+interface PageProps {
+  params: Promise<{ slug: string }>;
+}
 
+export default async function ProjectPage({ params }: PageProps) {
   // Await params before accessing its properties
   const resolvedParams = await params;
+  
   // Get the specific project
   const project = await getProjectBySlug(resolvedParams.slug);
   
