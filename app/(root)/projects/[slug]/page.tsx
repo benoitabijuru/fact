@@ -1,14 +1,11 @@
 import ProjectDetailView from '@/components/ProjectDetailsView';
 import { getProjectBySlug, getAllProjects } from '@/lib/actions/project.actions';
+import { SearchParamProps } from '@/types';
 import { notFound } from 'next/navigation';
 
 // Use Next.js built-in PageProps type
-type PageProps = {
-  params: Promise<{ slug: string }>;
-  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
-};
 
-export default async function ProjectPage({ params }: PageProps) {
+export default async function ProjectPage({ params }: SearchParamProps) {
   // Await params before accessing its properties
   const resolvedParams = await params;
   

@@ -8,7 +8,7 @@ const AboutUsPage = () => {
   const fadeInUp = {
     initial: { opacity: 0, y: 40 },
     animate: { opacity: 1, y: 0 },
-    transition: { duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] }
+    transition: { duration: 1.2, ease: "easeOut" }
   };
 
   const staggerContainer = {
@@ -23,13 +23,13 @@ const AboutUsPage = () => {
   const scaleIn = {
     initial: { scale: 0.9, opacity: 0 },
     animate: { scale: 1, opacity: 1 },
-    transition: { duration: 1.4, ease: [0.25, 0.46, 0.45, 0.94] }
+    transition: { duration: 1.4, ease: "easeOut" }
   };
 
   const slideInLeft = {
     initial: { x: -60, opacity: 0 },
     animate: { x: 0, opacity: 1 },
-    transition: { duration: 1.3, ease: [0.25, 0.46, 0.45, 0.94] }
+    transition: { duration: 1.3, ease: "easeOut" }
   };
 
   const slideInRight = {
@@ -38,28 +38,10 @@ const AboutUsPage = () => {
     transition: { duration: 1.3, ease: [0.25, 0.46, 0.45, 0.94] }
   };
 
-  // New smooth floating animation
-  const floatingAnimation = {
-    y: [0, -10, 0],
-    transition: {
-      duration: 6,
-      repeat: Infinity,
-      ease: "easeInOut"
-    }
-  };
-
+  // Fixed floating animation with proper ease string format
+ 
   // Enhanced hover animations
-  const smoothHover = {
-    scale: 1.03,
-    transition: { duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }
-  };
-
-  const buttonHover = {
-    scale: 1.05,
-    y: -2,
-    transition: { duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }
-  };
-
+ 
   return (
     <div className="min-h-screen bg-white text-black font-light">
       {/* Hero Section */}
@@ -85,7 +67,7 @@ const AboutUsPage = () => {
             animate={{ 
               ...scaleIn.animate, 
               scaleX: [0, 1],
-              transition: { duration: 1.8, ease: [0.25, 0.46, 0.45, 0.94] }
+              transition: { duration: 1.8, ease: "easeOut" }
             }}
           />
           <motion.p 
@@ -98,7 +80,7 @@ const AboutUsPage = () => {
           <motion.div 
             className="relative max-w-5xl mx-auto"
             variants={scaleIn}
-            animate={floatingAnimation}
+           
           >
             <Image 
               src="https://massdesigngroup.org/sites/default/files/styles/hero/public/2021-03/1804_N41_medium.jpg?itok=t2x8Ivhd" 
@@ -125,21 +107,21 @@ const AboutUsPage = () => {
             <motion.h2 
               className="text-3xl md:text-4xl font-thin mb-6"
               whileInView={{ opacity: [0, 1], x: [-20, 0] }}
-              transition={{ duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+              transition={{ duration: 1.2, ease: "easeOut" }}
             >
               Our Mission
             </motion.h2>
             <motion.p 
               className="text-gray-700 leading-relaxed mb-6"
               whileInView={{ opacity: [0, 1], y: [20, 0] }}
-              transition={{ duration: 1.1, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+              transition={{ duration: 1.1, delay: 0.2, ease: "easeOut" }}
             >
               To transform spaces into extraordinary experiences through innovative design, sustainable practices, and meticulous attention to detail. We believe architecture should not only shelter but also inspire and elevate the human spirit.
             </motion.p>
             <motion.p 
               className="text-gray-700 leading-relaxed mb-8"
               whileInView={{ opacity: [0, 1], y: [20, 0] }}
-              transition={{ duration: 1.1, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+              transition={{ duration: 1.1, delay: 0.3, ease: "easeOut" }}
             >
               Every project we undertake is an opportunity to create something meaningful, functional, and timeless that enhances the lives of those who inhabit our spaces.
             </motion.p>
@@ -147,21 +129,21 @@ const AboutUsPage = () => {
             <motion.h2 
               className="text-3xl md:text-4xl font-thin mb-6"
               whileInView={{ opacity: [0, 1], x: [-20, 0] }}
-              transition={{ duration: 1.2, delay: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+              transition={{ duration: 1.2, delay: 0.4, ease: "easeOut" }}
             >
               Our Vision
             </motion.h2>
             <motion.p 
               className="text-gray-700 leading-relaxed mb-6"
               whileInView={{ opacity: [0, 1], y: [20, 0] }}
-              transition={{ duration: 1.1, delay: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+              transition={{ duration: 1.1, delay: 0.5, ease: "easeOut" }}
             >
               To be recognized as leaders in architectural excellence, pioneering sustainable design solutions that harmonize with their environment while pushing the boundaries of creativity and innovation.
             </motion.p>
             <motion.p 
               className="text-gray-700 leading-relaxed"
               whileInView={{ opacity: [0, 1], y: [20, 0] }}
-              transition={{ duration: 1.1, delay: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+              transition={{ duration: 1.1, delay: 0.6, ease: "easeOut" }}
             >
               We envision a future where every structure we design contributes positively to communities, environments, and the broader architectural landscape.
             </motion.p>
@@ -268,7 +250,7 @@ const AboutUsPage = () => {
           <motion.div 
             className="text-center p-8 border border-gray-200 hover:border-black transition-all duration-500 hover:shadow-lg"
             variants={fadeInUp}
-            whileHover={smoothHover}
+           
           >
             <h3 className="text-xl font-medium mb-4">Innovation</h3>
             <p className="text-gray-700 leading-relaxed">
@@ -279,7 +261,7 @@ const AboutUsPage = () => {
           <motion.div 
             className="text-center p-8 border border-gray-200 hover:border-black transition-all duration-500 hover:shadow-lg"
             variants={fadeInUp}
-            whileHover={smoothHover}
+           
           >
             <h3 className="text-xl font-medium mb-4">Sustainability</h3>
             <p className="text-gray-700 leading-relaxed">
@@ -290,7 +272,7 @@ const AboutUsPage = () => {
           <motion.div 
             className="text-center p-8 border border-gray-200 hover:border-black transition-all duration-500 hover:shadow-lg"
             variants={fadeInUp}
-            whileHover={smoothHover}
+           
           >
             <h3 className="text-xl font-medium mb-4">Excellence</h3>
             <p className="text-gray-700 leading-relaxed">
@@ -406,10 +388,10 @@ const AboutUsPage = () => {
               key={index}
               className="text-center"
               variants={fadeInUp}
-              whileHover={smoothHover}
+            
             >
               <motion.div 
-                className="w-48 h-48 bg-gray-100 rounded-full mx-auto mb-6 flex items-center justify-content-center transition-all duration-500 hover:bg-gray-200"
+                className="w-48 h-48 bg-gray-100 rounded-full mx-auto mb-6 flex items-center justify-center transition-all duration-500 hover:bg-gray-200"
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
               >
@@ -459,7 +441,7 @@ const AboutUsPage = () => {
               key={index}
               className="text-center p-6 transition-all duration-500 hover:bg-gray-50 rounded-lg"
               variants={fadeInUp}
-              whileHover={smoothHover}
+            
             >
               <motion.div 
                 className="text-4xl font-thin text-gray-800 mb-2"
@@ -504,7 +486,7 @@ const AboutUsPage = () => {
           </p>
           <motion.button 
             className="bg-black text-white px-8 py-4 text-lg font-light hover:bg-gray-800 transition-all duration-500 shadow-lg hover:shadow-xl"
-            whileHover={buttonHover}
+           
             whileTap={{ scale: 0.98 }}
           >
             Start Your Project

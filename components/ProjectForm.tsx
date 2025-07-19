@@ -26,6 +26,10 @@ import { createProject } from '@/lib/actions/project.actions';
 import { IProject } from '@/lib/database/models/project.model';
 import Dropdown from './Dropdown';
 
+// Define diagram type enum for consistency
+const DIAGRAM_TYPES = ['floor_plan', 'elevation', 'section', 'detail', 'site_plan', 'concept', 'other'] as const;
+type DiagramType = typeof DIAGRAM_TYPES[number];
+
 // Zod validation schema
 const projectPhotoSchema = z.object({
   url: z.string().min(1, 'Photo URL is required'),
@@ -37,7 +41,7 @@ const projectPhotoSchema = z.object({
 const projectDiagramSchema = z.object({
   url: z.string().min(1, 'Diagram URL is required'),
   description: z.string().min(1, 'Diagram description is required'),
-  diagram_type: z.enum(['floor_plan', 'elevation', 'section', 'detail', 'site_plan', 'concept', 'other']).optional(),
+  diagram_type: z.enum(DIAGRAM_TYPES).optional(),
   alt_text: z.string().optional(),
   order: z.number().min(0).optional()
 });
@@ -74,6 +78,26 @@ const diagramTypes = [
   { value: 'other', label: 'Other' }
 ];
 
+// Helper function to extract category ID from category field
+const getCategoryId = (category: string | { _id: string; name: string; } | undefined): string => {
+  if (!category) return '';
+  if (typeof category === 'string') return category;
+  return category._id || '';
+};
+
+// Helper function to safely convert diagram_type to the expected enum
+const normalizeProjectDiagrams = (diagrams: any[] | undefined) => {
+  if (!diagrams) return [];
+  
+  return diagrams.map(diagram => ({
+    ...diagram,
+    // Ensure diagram_type is one of the valid enum values or undefined
+    diagram_type: DIAGRAM_TYPES.includes(diagram.diagram_type as DiagramType) 
+      ? diagram.diagram_type as DiagramType
+      : 'other' as DiagramType
+  }));
+};
+
 const CreateProjectForm = ({ type, project }: ProjectFormProps) => {
   const router = useRouter();
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
@@ -95,12 +119,12 @@ const CreateProjectForm = ({ type, project }: ProjectFormProps) => {
       projectDescription: project?.project_description || '',
       location: project?.location || '',
       year: project?.year || new Date().getFullYear(),
-      categoryId: project?.category || "",
+      categoryId: getCategoryId(project?.category),
       status: project?.status || 'idea',
       projectSize: project?.project_size || '',
       clientName: project?.client_name || '',
       projectPhotos: project?.project_photos || [],
-      projectDiagrams: project?.project_diagrams || [],
+      projectDiagrams: normalizeProjectDiagrams(project?.project_diagrams),
     },
     mode: 'onChange' // This will validate on change to show errors immediately
   });

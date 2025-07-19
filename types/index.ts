@@ -14,8 +14,8 @@ export type RemoveUrlQueryParams = {
 }
 
 export type SearchParamProps = {
-  params: { id: string }
-  searchParams: { [key: string]: string | string[] | undefined }
+  params: Promise<{ slug: string }>
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
 export type  GetAllProjectsParams = {
