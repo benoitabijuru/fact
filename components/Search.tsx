@@ -12,6 +12,9 @@ const Search = ({ placeholder = 'Search title...' }: { placeholder?: string }) =
   const searchParams = useSearchParams();
 
   useEffect(() => {
+    // Add a check to ensure searchParams is available
+    if (!searchParams) return;
+    
     const delayDebounceFn = setTimeout(() => {
       let newUrl = '';
 
