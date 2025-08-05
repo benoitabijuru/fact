@@ -1,4 +1,4 @@
-
+"use client"
 import CreateProjectForm from '@/components/ProjectForm'
 import React from 'react'
 

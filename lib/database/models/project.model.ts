@@ -190,7 +190,6 @@ ProjectSchema.virtual('formatted_year').get(function() {
 // Index for better query performance
 ProjectSchema.index({ status: 1, year: -1 });
 ProjectSchema.index({ category: 1, status: 1 });
-ProjectSchema.index({ slug: 1 });
 
 // Static method to find projects by status
 ProjectSchema.statics.findByStatus = function(status: string) {
