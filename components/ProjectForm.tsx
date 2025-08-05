@@ -86,7 +86,7 @@ const getCategoryId = (category: string | { _id: string; name: string; } | undef
 };
 
 // Helper function to safely convert diagram_type to the expected enum
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 const normalizeProjectDiagrams = (diagrams: IProjectDiagram[] | undefined ) => {
   if (!diagrams) return [];
   
