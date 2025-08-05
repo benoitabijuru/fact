@@ -26,7 +26,7 @@ const TopBar = () => {
           <nav className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-8">
               <Link
-                href="/about"
+                href="/about-us"
                 className="text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors"
               >
                 About
@@ -35,7 +35,7 @@ const TopBar = () => {
                 <CategoryFilter/>
               </Suspense>
               <Link
-                href="/contact"
+                href="/contact-us"
                 className="text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors"
               >
                 Contact Us
