@@ -3,7 +3,7 @@ import { getProjectBySlug, getAllProjects } from '@/lib/actions/project.actions'
 import { SearchParamProps } from '@/types';
 import { notFound } from 'next/navigation';
 
-// Use Next.js built-in PageProps type
+
 
 export default async function ProjectPage({ params }: SearchParamProps) {
   // Await params before accessing its properties

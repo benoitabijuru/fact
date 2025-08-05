@@ -1,117 +1,54 @@
 "use client"
+
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { 
   BarChart3, 
- 
   Settings, 
   FileText, 
   Bell, 
-  Search, 
   Menu, 
   X, 
   Home,
- 
-  Plus,
-  Filter,
   FolderPlus,
- 
 } from 'lucide-react';
-
 
 const AdminPanel: React.FC = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('');
-
-  // Sample data
- 
 
   const sidebarItems = [
     { id: 'dashboard', label: 'Dashboard', icon: Home },
-   
-    
+    { id: 'analytics', label: 'Analytics', icon: BarChart3 },
+    { id: 'reports', label: 'Reports', icon: FileText },
+    { id: 'settings', label: 'Settings', icon: Settings },
   ];
 
   const renderDashboard = () => (
     <div className="space-y-6">
-      
-
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-       
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
           <div className="grid grid-cols-2 gap-4">
-           
             <Link 
-              href="admin/create"
+              href="/admin/create"
               className="p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors flex flex-col items-center justify-center text-center group hover:border-blue-300 hover:shadow-md"
             >
               <FolderPlus className="w-5 h-5 text-gray-600 mb-2 group-hover:text-blue-600 transition-colors" />
               <span className="text-sm font-medium text-gray-700 group-hover:text-blue-700 transition-colors">Create Project</span>
             </Link>
-           
           </div>
         </div>
       </div>
     </div>
   );
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const renderUsers = () => (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <h2 className="text-xl font-semibold text-gray-900">Users Management</h2>
-        <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2">
-          <Plus className="w-4 h-4" />
-          <span>Add User</span>
-        </button>
-      </div>
-
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-        <div className="p-6 border-b border-gray-200">
-          <div className="flex space-x-4">
-            <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-              <input
-                type="text"
-                placeholder="Search users..."
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-            </div>
-            <button className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors flex items-center space-x-2">
-              <Filter className="w-4 h-4" />
-              <span>Filter</span>
-            </button>
-          </div>
-        </div>
-
-        <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead className="bg-gray-50">
-              <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">User</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Role</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-              </tr>
-            </thead>
-          
-          </table>
-        </div>
-      </div>
-    </div>
-  );
-
-  
 
   const renderContent = () => {
     switch (activeTab) {
       case 'dashboard':
         return renderDashboard();
-    
+      
+      case 'analytics':
         return (
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 text-center">
             <BarChart3 className="w-16 h-16 text-gray-300 mx-auto mb-4" />
@@ -119,6 +56,7 @@ const AdminPanel: React.FC = () => {
             <p className="text-gray-500">Analytics features coming soon...</p>
           </div>
         );
+      
       case 'reports':
         return (
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 text-center">
@@ -127,6 +65,7 @@ const AdminPanel: React.FC = () => {
             <p className="text-gray-500">Reports section coming soon...</p>
           </div>
         );
+      
       case 'settings':
         return (
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 text-center">
@@ -135,6 +74,7 @@ const AdminPanel: React.FC = () => {
             <p className="text-gray-500">Settings panel coming soon...</p>
           </div>
         );
+      
       default:
         return renderDashboard();
     }

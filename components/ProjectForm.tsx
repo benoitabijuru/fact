@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useState, SetStateAction } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -23,7 +23,7 @@ import { useRouter } from "next/navigation";
 import { FileUploader } from "@/components/FileUpload";
 import { useUploadThing } from '@/lib/uploadthing';
 import { createProject } from '@/lib/actions/project.actions';
-import { IProject } from '@/lib/database/models/project.model';
+import { IProject, IProjectDiagram } from '@/lib/database/models/project.model';
 import Dropdown from './Dropdown';
 
 // Define diagram type enum for consistency
@@ -86,7 +86,8 @@ const getCategoryId = (category: string | { _id: string; name: string; } | undef
 };
 
 // Helper function to safely convert diagram_type to the expected enum
-const normalizeProjectDiagrams = (diagrams: any[] | undefined) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const normalizeProjectDiagrams = (diagrams: IProjectDiagram[] | undefined ) => {
   if (!diagrams) return [];
   
   return diagrams.map(diagram => ({
@@ -283,15 +284,17 @@ const CreateProjectForm = ({ type, project }: ProjectFormProps) => {
     }
   };
 
-  const handlePhotoFileChange = (files: File[], index: number) => {
-    console.log(`Photo files changed for index ${index}:`, files);
-    setPhotoFiles(prev => ({ ...prev, [index]: files }));
-  };
+const handlePhotoFileChange = (files: SetStateAction<File[]>, index: number) => {
+  const resolvedFiles = typeof files === 'function' ? files([]) : files;
+  console.log(`Photo files changed for index ${index}:`, resolvedFiles);
+  setPhotoFiles(prev => ({ ...prev, [index]: resolvedFiles }));
+};
 
-  const handleDiagramFileChange = (files: File[], index: number) => {
-    console.log(`Diagram files changed for index ${index}:`, files);
-    setDiagramFiles(prev => ({ ...prev, [index]: files }));
-  };
+const handleDiagramFileChange = (files: SetStateAction<File[]>, index: number) => {
+  const resolvedFiles = typeof files === 'function' ? files([]) : files;
+  console.log(`Diagram files changed for index ${index}:`, resolvedFiles);
+  setDiagramFiles(prev => ({ ...prev, [index]: resolvedFiles }));
+};
 
   const handleFormSubmit = (e: React.FormEvent) => {
     console.log('Form submit event triggered');
