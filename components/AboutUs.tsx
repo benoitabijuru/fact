@@ -83,7 +83,7 @@ const AboutUsPage = () => {
            
           >
             <Image 
-              src="https://massdesigngroup.org/sites/default/files/styles/hero/public/2021-03/1804_N41_medium.jpg?itok=t2x8Ivhd" 
+              src="https://media.licdn.com/dms/image/v2/D4E22AQFI9GGsouZiNA/feedshare-shrink_800/feedshare-shrink_800/0/1731516472988?e=1758758400&v=beta&t=CeWXneQf5eyuFYOJzxNXDVEoyMy7g3LgECJ58ZMwmrs" 
               alt="Modern architectural design"
               width={1200}
               height={500}
@@ -159,7 +159,7 @@ const AboutUsPage = () => {
               transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
             >
               <Image 
-                src="https://massdesigngroup.org/sites/default/files/styles/flow_small/public/2024-07/1813_N601_indd.jpg?itok=lKmW2B3p" 
+                src="https://media.licdn.com/dms/image/v2/D4E22AQERk-ypngMUvg/feedshare-shrink_800/feedshare-shrink_800/0/1731516513593?e=1758758400&v=beta&t=-jEKra3oHl5S3OvvnyyP0X2HnJDiMNpPY3hr0_3rwDg" 
                 alt="Architectural interior design"
                 fill
                 className="object-cover rounded-lg shadow-xl transition-all duration-700 hover:shadow-2xl"
@@ -301,7 +301,7 @@ const AboutUsPage = () => {
               transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
             >
               <Image 
-                src="https://massdesigngroup.org/sites/default/files/styles/flow_small/public/2024-07/1813_N601_indd.jpg?itok=lKmW2B3p" 
+                src="https://media.licdn.com/dms/image/v2/D4E22AQGNlj8tGffHcg/feedshare-shrink_800/feedshare-shrink_800/0/1731516569893?e=1758758400&v=beta&t=vQhsT90UCWSmo2DNp6WD8oxx3kgjVNP-xHSOBvdpysc" 
                 alt="Architectural workspace and design process"
                 fill
                 className="object-cover rounded-lg shadow-xl transition-all duration-700 hover:shadow-2xl"

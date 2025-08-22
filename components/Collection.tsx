@@ -17,17 +17,11 @@ const Collection = ({
     <>
       {data.length > 0 ? (
         <div className="max-w-7xl mx-auto px-4 py-12">
-          <div className="fixed top-0 left-0 right-0 z-40 bg-white border-b border-gray-200">
-            <div className="max-w-7xl mx-auto px-6 py-4">
-              <h1 className="text-2xl font-light tracking-wide">ARCHITECTURE STUDIO</h1>
-            </div>
-          </div>
-          
-          <div className="mt-20">
+          <div className="">
             <ul className="grid grid-cols-1 gap-8 mx-50">
               {data.map((project, index) => {
                 return (
-                  <li key={project.slug} className="flex justify-center">
+                  <li key={project.slug} className="">
                     <Card project={project} index={index} />
                   </li>
                 );

@@ -101,7 +101,7 @@ const TopBar = () => {
               About
             </Link>
             <Link
-              href="/projects"
+              href="/"
               className="text-gray-700 hover:text-gray-900 block px-3 py-2 text-base font-medium transition-colors"
               onClick={() => setIsOpen(false)}
             >

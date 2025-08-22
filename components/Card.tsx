@@ -17,59 +17,69 @@ const Card = ({ project, index = 0 }: CardProps) => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: index * 0.1 }}
     >
-      <Link
-        href={`/projects/${project.slug}`}
-        className=""
-      >
-        <div className="flex flex-col md:flex-row gap-1 md:gap-2 bg-white overflow-hidden duration-300 justify-between">
+      
+        <div className="flex flex-col md:flex-row gap-1 md:gap-2 bg-white overflow-hidden duration-300 space-x-6">
           <div className="flex flex-col justify-center w-full md:w-2/5">
+                <Link
+              href={`/projects/${project.slug}`}
+              className=""
+            >
             <h3 className="text-xl md:text-xl font-bold text-black mb-4 group-hover:text-gray-600 transition-colors">
               {project.project_name}
             </h3>
-            <div className="space-y-2 mb-4">
+            </Link>
+            <div className="space-t-2 mb-4 ">
+              <p className='font-bold'>
                 Location
+              </p>
               <p className="text-gray-600 text-sm md:text-base">
                  {project.location}
               </p>
-              <p className="text-gray-600 text-sm md:text-base">
+              <p className="text-black font-bold pt-2 text-sm md:text-base">
                 {project.year}
               </p>
             </div>
-            <div className="space-y-2 mb-4">
-                Category
+            <div className=" mb-4">
+              <p className='font-bold'>
+               Category
+              </p>
+                
               <p className="text-gray-600 text-sm md:text-base">
                 {project.category.name}
               </p>
-              Client
+              <p className='font-bold'>
+                Client
+              </p>
               <p className="text-gray-600 text-sm md:text-base">
                 {project.client_name}
               </p>
-              Status
+              <p className='font-bold'>
+               Status
+              </p>
               <p className="text-gray-600 text-sm md:text-base">
                 
-                <span className={` text-sm md:text-base capitalize${
-                  project.status === 'completed' 
-                    ? ' text-green-800' 
-                    : project.status === 'progress' 
-                    ? ' text-blue-800' 
-                    : ' text-yellow-800'
-                }`}>
+                <span className='text-sm md:text-base capitalize'>
                   {project.status}
                 </span>
               </p>
             </div>
           </div>
-          <div className="relative overflow-hidden w-full md:w-1/2 lg:w-2/5">
+          <div className="relative overflow-hidden w-full md:w-1/2 lg:w-2/5 bg-black">
+             <Link
+              href={`/projects/${project.slug}`}
+              className=""
+            >
             <motion.img
               src={project.cover_image}
               alt={project.project_name}
-              className="w-full h-64 md:h-80 object-cover"
+              className="w-full h-full object-cover"
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.6 }}
             />
+            </Link>
           </div>
         </div>
-      </Link>
+      
     </motion.div>
   );
 };

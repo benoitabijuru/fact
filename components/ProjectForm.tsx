@@ -427,8 +427,8 @@ const handleDiagramFileChange = (files: SetStateAction<File[]>, index: number) =
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent>
-                            <SelectItem value="idea">Idea</SelectItem>
-                            <SelectItem value="progress">In Progress</SelectItem>
+                            <SelectItem value="idea">Under Design</SelectItem>
+                            <SelectItem value="progress">Under Construction</SelectItem>
                             <SelectItem value="completed">Completed</SelectItem>
                           </SelectContent>
                         </Select>

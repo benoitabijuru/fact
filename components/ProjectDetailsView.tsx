@@ -2,9 +2,10 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, X, Play, Pause, Image, FileText, ArrowLeft } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Play, Pause, Image, FileText, ArrowLeft } from 'lucide-react';
 import { IProject } from '@/lib/database/models/project.model';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 interface ProjectDetailViewProps {
   project: IProject;
@@ -98,7 +99,7 @@ const ProjectDetailView: React.FC<ProjectDetailViewProps> = ({ project, allProje
     
     autoPlayRef.current = setInterval(() => {
       nextSlide();
-    }, 2000);
+    }, 4000);
     
     setIsAutoPlaying(true);
   };
@@ -231,12 +232,10 @@ const ProjectDetailView: React.FC<ProjectDetailViewProps> = ({ project, allProje
           </div>
 
           <div className="flex items-center space-x-2">
-            <button
-              onClick={goBack}
-              className="p-2 bg-white/20 hover:bg-white/30 rounded-full transition-all"
-            >
-              <X className="w-5 h-5 text-white" />
-            </button>
+            <Link href="/" className="p-2 bg-slate-900 hover:bg-white/30 rounded-full transition-all">
+              <p className='text-white'>Fact Logo</p>
+            </Link>
+            
           </div>
         </div>
       </div>
@@ -323,12 +322,12 @@ const ProjectDetailView: React.FC<ProjectDetailViewProps> = ({ project, allProje
             <h3 className="text-2xl font-light mb-6">{project.project_name}</h3>
             
             {/* View Toggle Buttons */}
-            <div className="flex flex-row space-y-2 mb-6">
+            <div className="flex flex-row  space-x-10 mb-6">
               <button
                 onClick={() => switchView('overview')}
                 className={`flex items-center space-x-2 px-4 py-3 rounded-lg text-left transition-all ${
                   currentView === 'overview' 
-                    ? 'bg-black text-white' 
+                    ? 'bg-slate-900 text-white' 
                     : 'bg-gray-100 text-black hover:bg-gray-200'
                 }`}
               >
@@ -340,7 +339,7 @@ const ProjectDetailView: React.FC<ProjectDetailViewProps> = ({ project, allProje
                 onClick={() => switchView('photos')}
                 className={`flex items-center space-x-2 px-4 py-3 rounded-lg text-left transition-all ${
                   currentView === 'photos' 
-                    ? 'bg-black text-white' 
+                    ? 'bg-slate-900 text-white' 
                     : 'bg-gray-100 text-black hover:bg-gray-200'
                 }`}
               >
@@ -348,17 +347,18 @@ const ProjectDetailView: React.FC<ProjectDetailViewProps> = ({ project, allProje
                 <span>Photos</span>
               </button>
               
-              <button
+               <button
                 onClick={() => switchView('diagrams')}
                 className={`flex items-center space-x-2 px-4 py-3 rounded-lg text-left transition-all ${
                   currentView === 'diagrams' 
-                    ? 'bg-black text-white' 
+                    ? 'bg-slate-900 text-white' 
                     : 'bg-gray-100 text-black hover:bg-gray-200'
                 }`}
               >
                 <FileText className="w-4 h-4" />
                 <span>Diagrams</span>
               </button>
+              
             </div>
 
             {/* Dynamic Content Based on Current View */}
@@ -366,34 +366,34 @@ const ProjectDetailView: React.FC<ProjectDetailViewProps> = ({ project, allProje
               {currentView === 'overview' && (
                 <div className="space-y-6">
                   <div>
-                    <p className="text-sm opacity-60 mb-2">Project Description</p>
-                    <p className="text-base leading-relaxed">{project.project_description}</p>
+                    <p className="text-lg  mb-2">Project Description</p>
+                    <p className="text-sm opacity-60 leading-relaxed">{project.project_description}</p>
                   </div>
                   
                   <div className="grid grid-cols-1 gap-4">
                     <div>
-                      <p className="text-sm opacity-60 mb-1">Location</p>
-                      <p className="text-lg">{project.location}</p>
+                      <p className="text-lg  mb-1">Location</p>
+                      <p className="text-sm opacity-60">{project.location}</p>
                     </div>
                     
                     <div>
-                      <p className="text-sm opacity-60 mb-1">Year</p>
-                      <p className="text-lg">{project.year}</p>
+                      <p className="text-lg  mb-1">Year</p>
+                      <p className="text-sm opacity-60">{project.year}</p>
                     </div>
                     
                     <div>
-                      <p className="text-sm opacity-60 mb-1">Category</p>
-                      <p className="text-lg">{project.category.name}</p>
+                      <p className="text-lg">Category</p>
+                      <p className="text-sm opacity-60">{project.category.name}</p>
                     </div>
                     
                     <div>
-                      <p className="text-sm opacity-60 mb-1">Client</p>
-                      <p className="text-lg">{project.client_name}</p>
+                      <p className="text-lg  ">Client</p>
+                      <p className="text-sm opacity-60">{project.client_name}</p>
                     </div>
                     
                     <div>
-                      <p className="text-sm opacity-60 mb-1">Status</p>
-                      <p className="text-lg capitalize">{project.status}</p>
+                      <p className="text-lg">Status</p>
+                      <p className="text-sm  opacity-60 capitalize">{project.status}</p>
                     </div>
                   </div>
                 </div>
