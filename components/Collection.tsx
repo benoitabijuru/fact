@@ -6,13 +6,29 @@ type CollectionProps = {
   emptyTitle: string;
   emptyStateSubtext: string;
   collectionType?: 'My_Tickets' | 'All_Projects';
+  totalPages?:number;
+  currentPage?:number;
+  hasNext?:boolean;
+  hasPrev?:boolean;
+  totalCount?:number;
 }
 
 const Collection = ({
   data,
   emptyTitle,
   emptyStateSubtext,
+  // totalPages = 0,
+  // currentPage = 1,
+  // hasNext = false,
+  // hasPrev = false,
+  // totalCount = 0
 }: CollectionProps) => {
+ 
+
+  
+ 
+
+  
   return (
     <>
       {data.length > 0 ? (

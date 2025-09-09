@@ -232,8 +232,8 @@ const ProjectDetailView: React.FC<ProjectDetailViewProps> = ({ project, allProje
           </div>
 
           <div className="flex items-center space-x-2">
-            <Link href="/" className="p-2 bg-slate-900 hover:bg-white/30 rounded-full transition-all">
-              <p className='text-white'>Fact Logo</p>
+            <Link href="/" className="p-2 bg-slate-900 hover:bg-white/30 rounded-full transition-all hover:text-black">
+              <p className='text-white'>FACT</p>
             </Link>
             
           </div>

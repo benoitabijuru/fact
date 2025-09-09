@@ -19,8 +19,10 @@ export type SearchParamProps = {
 }
 
 export type  GetAllProjectsParams = {
-  query: string
-  category: string
+  query: string;
+  category: string;
+  limit?:number;
+  page?:number;
 }
 
 export interface CreateProjectParams {

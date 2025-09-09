@@ -2,6 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const AboutUsPage = () => {
   // Enhanced smooth animations with longer durations and smoother easing
@@ -74,7 +75,7 @@ const AboutUsPage = () => {
             className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed mb-12"
             variants={fadeInUp}
           >
-            We are passionate architects dedicated to creating spaces that inspire, function beautifully, and stand the test of time.
+           We are passionate architects, urban planners, landscapers, engineers, designers, historians, psychologists, sociologists, materials specialists, project managers, community engagement specialists, cultural consultants and scientists—united in shaping spaces that inspire, elevate the human experience, and stand the test of time. With beauty, purpose, and innovation at our core, we create environments that nurture well-being, honor culture, advance technology, and embrace sustainability. Every project we undertake enriches the built environment and uplifts the communities it serves.
           </motion.p>
           
           <motion.div 
@@ -116,15 +117,15 @@ const AboutUsPage = () => {
               whileInView={{ opacity: [0, 1], y: [20, 0] }}
               transition={{ duration: 1.1, delay: 0.2, ease: "easeOut" }}
             >
-              To transform spaces into extraordinary experiences through innovative design, sustainable practices, and meticulous attention to detail. We believe architecture should not only shelter but also inspire and elevate the human spirit.
+             We build with a belief in humanity. Construction is more than shelter—it is justice, dignity, healing, and human advancement. We celebrate sustainability, blending nature, technology, and creativity. Every space we create turns imagination into reality, shaping a future where people live, grow, and thrive together.
             </motion.p>
-            <motion.p 
+            {/* <motion.p 
               className="text-gray-700 leading-relaxed mb-8"
               whileInView={{ opacity: [0, 1], y: [20, 0] }}
               transition={{ duration: 1.1, delay: 0.3, ease: "easeOut" }}
             >
               Every project we undertake is an opportunity to create something meaningful, functional, and timeless that enhances the lives of those who inhabit our spaces.
-            </motion.p>
+            </motion.p> */}
             
             <motion.h2 
               className="text-3xl md:text-4xl font-thin mb-6"
@@ -138,15 +139,15 @@ const AboutUsPage = () => {
               whileInView={{ opacity: [0, 1], y: [20, 0] }}
               transition={{ duration: 1.1, delay: 0.5, ease: "easeOut" }}
             >
-              To be recognized as leaders in architectural excellence, pioneering sustainable design solutions that harmonize with their environment while pushing the boundaries of creativity and innovation.
+              Shaping a future where architecture heals, inspires, and sustains life.
             </motion.p>
-            <motion.p 
+            {/* <motion.p 
               className="text-gray-700 leading-relaxed"
               whileInView={{ opacity: [0, 1], y: [20, 0] }}
               transition={{ duration: 1.1, delay: 0.6, ease: "easeOut" }}
             >
               We envision a future where every structure we design contributes positively to communities, environments, and the broader architectural landscape.
-            </motion.p>
+            </motion.p> */}
           </motion.div>
           
           <motion.div 
@@ -202,7 +203,7 @@ const AboutUsPage = () => {
             whileInView={{ opacity: [0, 1], y: [30, 0] }}
             transition={{ duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
-            Founded in 2010, Architectural Studio emerged from a shared vision among three passionate architects who believed that exceptional design could transform not just buildings, but entire communities. What started as a small practice has grown into a renowned architectural firm with over 200 completed projects across residential, commercial, and institutional sectors.
+           In 2022, Architectural Studio was born from one simple belief: design can change the world. Not just buildings, but communities. One architect. One engineer. One vision.
           </motion.p>
           
           <motion.p 
@@ -210,7 +211,7 @@ const AboutUsPage = () => {
             whileInView={{ opacity: [0, 1], y: [30, 0] }}
             transition={{ duration: 1.2, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
-            Our journey began with a simple residential project that challenged conventional design thinking. This early success taught us that true architectural excellence comes from understanding our clients&apos; deepest needs and translating them into spaces that exceed expectations.
+           Our first project was a small home, but it dared to break the rules. It showed us that architecture isn’t just about space it’s about understanding people, their dreams, their lives, and turning that understanding into experiences that inspire.
           </motion.p>
           
           <motion.p 
@@ -218,7 +219,7 @@ const AboutUsPage = () => {
             whileInView={{ opacity: [0, 1], y: [30, 0] }}
             transition={{ duration: 1.2, delay: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
-            Today, we continue to uphold the same principles that guided our founding: integrity in design, sustainability in practice, and innovation in every solution we create.
+            Today, with over 15 projects across residential, commercial, and institutional spaces, we still follow that same vision. Integrity in design. Sustainability in practice. Innovation in every solution. We don’t just create buildings—we craft spaces that shape lives and communities for generations to come.
           </motion.p>
         </motion.div>
       </motion.section>
@@ -432,10 +433,10 @@ const AboutUsPage = () => {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {[
-            { number: "15+", label: "Design Awards" },
-            { number: "200+", label: "Projects Completed" },
-            { number: "50+", label: "Team Members" },
-            { number: "12", label: "Years of Excellence" }
+            // { number: "15+", label: "Design Awards" },
+            { number: "15+", label: "Projects Completed" },
+            { number: "5+", label: "Team Members" },
+            { number: "3", label: "Years of Excellence" }
           ].map((stat, index) => (
             <motion.div 
               key={index}
@@ -484,13 +485,18 @@ const AboutUsPage = () => {
           <p className="text-lg text-gray-700 max-w-2xl mx-auto leading-relaxed mb-12">
             Let&apos;s discuss your vision and explore how we can transform your space into something truly remarkable.
           </p>
+          <Link
+          href="/contact-us"
+          >
           <motion.button 
             className="bg-black text-white px-8 py-4 text-lg font-light hover:bg-gray-800 transition-all duration-500 shadow-lg hover:shadow-xl"
            
             whileTap={{ scale: 0.98 }}
           >
-            Start Your Project
+            Contact us to discuss Your Project
           </motion.button>
+          </Link>
+          
         </motion.div>
       </motion.section>
     </div>

@@ -4,13 +4,15 @@ import { connectToDatabase } from "../database";
 import Project from "../database/models/project.model";
 import { handleError } from "../utils";
 import Category from "../database/models/category.models";
+import { unstable_cache } from "next/cache";
  // Adjust import path as needed
 
 
 
-const getCategoryByName = async (name: string) => {
+const getCategoryByName = unstable_cache(async (name: string) => {
   return Category.findOne({ name: { $regex: name, $options: 'i' } })
-}
+})
+
 
 export const createProject = async ({
   projectName,
@@ -105,24 +107,39 @@ export const createProject = async ({
 
 // Optional: Additional helper actions you might need
 
-export const getProjectBySlug = async (slug: string) => {
-  try {
-    await connectToDatabase();
-    
-    const project = await Project.findOne({ slug }).populate('category');
-    
-    if (!project) {
-      throw new Error('Project not found');
+export const getProjectBySlug = unstable_cache(
+  async (slug: string) => {
+    try {
+      await connectToDatabase();
+      
+      const project = await Project.findOne({ slug })
+        .populate({
+          path: 'category',
+          select: 'slug',
+          options: { lean: true }
+        })
+        .lean()
+        .exec();
+      
+      if (!project) {
+        return null;
+      }
+      
+      return JSON.parse(JSON.stringify(project));
+    } catch (error) {
+      handleError(error);
+      return null;
     }
-    
-    return JSON.parse(JSON.stringify(project));
-  } catch (error) {
-    handleError(error);
+  },
+  ['project-by-slug'],
+  { 
+    revalidate: 600, // Cache for 10 minutes
+    tags: ['projects']
   }
-};
+);
 
 
-export const getAllProjects = async ({ query, category }: GetAllProjectsParams) => {
+export const getAllProjects = async ({ query='', category='', limit=12 , page=1}: GetAllProjectsParams) => {
   try {
     await connectToDatabase();
 
@@ -132,15 +149,42 @@ export const getAllProjects = async ({ query, category }: GetAllProjectsParams) 
       $and: [titleCondition, categoryCondition ? { category: categoryCondition._id } : {}],
     }
     
-    const projects = await Project.find(conditions)
+    const skip = (page -1)* limit;
+    const [projects, totalCount] = await Promise.all([
+      Project.find(conditions)
       .populate('category')
-      .sort({ created_at: 'desc' });
+      .sort({created_at:-1})
+      .limit(limit)
+      .skip(skip)
+      .lean()
+      .exec(),
+      
+      Project.countDocuments(conditions).exec()
+    ]);
     
-    return JSON.parse(JSON.stringify(projects));
+    const totalPages = Math.ceil(totalCount / limit);
+
+    return {
+      projects:JSON.parse(JSON.stringify(projects)),
+      totalCount,
+      totalPages,
+      currentPage:page,
+      hasNext:page < totalPages,
+      hasPrev:page > 1
+    }
   } catch (error) {
     handleError(error);
   }
 };
+
+export const getCachedAllProjects = unstable_cache(
+  getAllProjects,
+  ['all-projects'],
+  {
+    revalidate:300,
+    tags:['projects']
+  }
+)
 
 
 export const updateProject = async (projectId: string, updateData: Partial<CreateProjectParams>) => {
