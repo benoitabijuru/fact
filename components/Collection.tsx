@@ -32,7 +32,7 @@ const Collection = ({
   return (
     <>
       {data.length > 0 ? (
-        <div className="max-w-7xl mx-auto px-4 py-12">
+        <div className="max-w-7xl mx-auto px-4 py-8">
           <div className="">
             <ul className="grid grid-cols-1 gap-8 mx-50">
               {data.map((project, index) => {

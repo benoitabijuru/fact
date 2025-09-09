@@ -1,4 +1,5 @@
 
+import CategoryFilter from "@/components/CategoryFilter";
 import Collection from "@/components/Collection";
 import { getAllCategories } from "@/lib/actions/category.actions";
 import {  getCachedAllProjects } from "@/lib/actions/project.actions";
@@ -34,6 +35,10 @@ export default async function Home({ searchParams }: SearchParamProps) {
 
   return (
     <div className="min-h-screen bg-white">
+      <div className="flex justify-end w-full pr-52  pt-5 z-10">
+  <CategoryFilter />
+</div>
+     
       <Suspense fallback={<ProjectsLoading/>}>
       <Collection
         data={projects?.projects || []}

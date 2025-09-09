@@ -2,8 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import CategoryFilter from './CategoryFilter';
-import { Suspense } from 'react'
+
 const TopBar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -31,9 +30,7 @@ const TopBar = () => {
               >
                 About
               </Link>
-              <Suspense>
-                <CategoryFilter/>
-              </Suspense>
+              
               <Link
                 href="/contact-us"
                 className="text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors"
