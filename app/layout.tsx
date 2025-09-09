@@ -8,7 +8,7 @@ import {
 
 export const metadata: Metadata = {
   title: "Fact ltd",
-  description: "A leading Rwandan Based Architecture firm.",
+  description: "A leading Rwandan-based architecture firm crafting innovative spaces that blend modern design with cultural heritage.",
 };
 
 export default function RootLayout({
