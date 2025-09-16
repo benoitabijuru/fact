@@ -34,7 +34,11 @@ const Collection = ({
       {data.length > 0 ? (
         <div className="max-w-7xl mx-auto px-4 py-8">
           <div className="">
-            <ul className="grid grid-cols-1 gap-8 mx-50">
+            <ul className="grid grid-cols-1 gap-8 mx-2       /* default: tiny margin on extra-small devices */
+    sm:mx-6    /* slightly bigger margin on small devices */
+    md:mx-12   /* medium devices */
+    lg:mx-24   /* large devices */
+    xl:mx-40   /* extra large screens */">
               {data.map((project, index) => {
                 return (
                   <li key={project.slug} className="">

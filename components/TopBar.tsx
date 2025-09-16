@@ -30,6 +30,12 @@ const TopBar = () => {
               >
                 About
               </Link>
+              <Link
+                href="/"
+                className="text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors"
+              >
+                Project
+              </Link>
               
               <Link
                 href="/contact-us"
@@ -91,7 +97,7 @@ const TopBar = () => {
         <div className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t border-gray-200">
             <Link
-              href="/about"
+              href="/about-us"
               className="text-gray-700 hover:text-gray-900 block px-3 py-2 text-base font-medium transition-colors"
               onClick={() => setIsOpen(false)}
             >
@@ -105,7 +111,7 @@ const TopBar = () => {
               Projects
             </Link>
             <Link
-              href="/contact"
+              href="/contact-us"
               className="text-gray-700 hover:text-gray-900 block px-3 py-2 text-base font-medium transition-colors"
               onClick={() => setIsOpen(false)}
             >

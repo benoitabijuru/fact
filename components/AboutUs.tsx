@@ -3,6 +3,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
+import VideoCard from './VideoCard';
 
 const AboutUsPage = () => {
   // Enhanced smooth animations with longer durations and smoother easing
@@ -83,13 +84,7 @@ const AboutUsPage = () => {
             variants={scaleIn}
            
           >
-            <Image 
-              src="https://media.licdn.com/dms/image/v2/D4E22AQFI9GGsouZiNA/feedshare-shrink_800/feedshare-shrink_800/0/1731516472988?e=1758758400&v=beta&t=CeWXneQf5eyuFYOJzxNXDVEoyMy7g3LgECJ58ZMwmrs" 
-              alt="Modern architectural design"
-              width={1200}
-              height={500}
-              className="w-full h-96 md:h-[500px] object-cover rounded-lg shadow-2xl transition-all duration-700 hover:shadow-3xl"
-            />
+           <VideoCard/>
             <div className="absolute inset-0 bg-opacity-10 rounded-lg transition-all duration-500"></div>
           </motion.div>
         </motion.div>

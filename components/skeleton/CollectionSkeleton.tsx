@@ -43,12 +43,7 @@ const CollectionSkeleton: React.FC = () => {
         ))}
       </ul>
 
-      {/* Pagination Skeleton */}
-      <div className="flex justify-center items-center gap-4 mt-12">
-        <div className="h-10 w-10 rounded-full bg-gray-200 animate-pulse" />
-        <div className="h-10 w-10 rounded-full bg-gray-200 animate-pulse" />
-        <div className="h-10 w-10 rounded-full bg-gray-200 animate-pulse" />
-      </div>
+     
     </div>
   );
 };

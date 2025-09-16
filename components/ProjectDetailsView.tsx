@@ -194,7 +194,7 @@ const ProjectDetailView: React.FC<ProjectDetailViewProps> = ({ project, allProje
       {/* Header Controls */}
       <div className="absolute top-0 left-0 right-0 z-60 bg-gradient-to-b from-black/50 to-transparent p-6">
         <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center sm:space-x-4">
             <button
               onClick={goBack}
               className="p-2 bg-white/20 hover:bg-white/30 rounded-full transition-all"
@@ -225,7 +225,7 @@ const ProjectDetailView: React.FC<ProjectDetailViewProps> = ({ project, allProje
             )}
             
             {allProjects.length <= 1 && (
-              <h2 className="text-white text-xl font-light">
+              <h2 className="text-white text-base sm:text-xl font-light">
                 {project.project_name}
               </h2>
             )}
@@ -241,9 +241,9 @@ const ProjectDetailView: React.FC<ProjectDetailViewProps> = ({ project, allProje
       </div>
 
       {/* Main Content Area */}
-      <div className="w-full h-full grid grid-cols-3 gap-0">
+      <div className="w-full h-full grid grid-cols-1 md:grid-cols-3 gap-0">
         {/* Left Side - Image/Content Area (2/3) */}
-        <div className="col-span-2 relative">
+        <div className="col-span-2 relative h-64 sm:h-96 md:h-full">
           <AnimatePresence mode="wait">
             {currentView === 'overview' && (
               <motion.div
@@ -317,9 +317,9 @@ const ProjectDetailView: React.FC<ProjectDetailViewProps> = ({ project, allProje
         </div>
 
         {/* Right Side - Content Panel (1/3) */}
-        <div className="col-span-1 bg-white p-8 flex flex-col justify-between overflow-y-auto">
+        <div className="col-span-1 bg-white p-4 sm:p-6 md:p-8 flex flex-col justify-between overflow-y-auto">
           <div className="text-black">
-            <h3 className="text-2xl font-light mb-6">{project.project_name}</h3>
+            <h3 className="text-xl sm:text-2xl font-light mb-4 sm:mb-6">{project.project_name}</h3>
             
             {/* View Toggle Buttons */}
             <div className="flex flex-row  space-x-10 mb-6">
@@ -337,7 +337,7 @@ const ProjectDetailView: React.FC<ProjectDetailViewProps> = ({ project, allProje
               
               <button
                 onClick={() => switchView('photos')}
-                className={`flex items-center space-x-2 px-4 py-3 rounded-lg text-left transition-all ${
+                className={`flex items-center space-x-2 sm:px-4 px-3 sm:py-3 py-2 rounded-lg text-left transition-all ${
                   currentView === 'photos' 
                     ? 'bg-slate-900 text-white' 
                     : 'bg-gray-100 text-black hover:bg-gray-200'
@@ -349,7 +349,7 @@ const ProjectDetailView: React.FC<ProjectDetailViewProps> = ({ project, allProje
               
                <button
                 onClick={() => switchView('diagrams')}
-                className={`flex items-center space-x-2 px-4 py-3 rounded-lg text-left transition-all ${
+                className={`flex items-center space-x-2 px-3 py-2 sm:px-4 sm:py-3 rounded-lg text-sm sm:text-base transition-all ${
                   currentView === 'diagrams' 
                     ? 'bg-slate-900 text-white' 
                     : 'bg-gray-100 text-black hover:bg-gray-200'

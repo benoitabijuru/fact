@@ -60,23 +60,23 @@ export default async function Home({ searchParams }: SearchParamProps) {
 function ProjectsLoading() {
   return (
     <div className="max-w-7xl mx-auto px-4 py-12">
-      <div className="">
-        <ul className="grid grid-cols-1 gap-8 mx-50">
-          {Array.from({ length: 6 }).map((_, i) => (
-            <li key={i} className="animate-pulse">
-              <div className="bg-white rounded-lg shadow-md overflow-hidden">
-                <div className="bg-gray-200 h-64 w-full"></div>
-                <div className="p-6">
-                  <div className="bg-gray-200 h-6 rounded mb-2"></div>
-                  <div className="bg-gray-200 h-4 rounded w-3/4 mb-2"></div>
-                  <div className="bg-gray-200 h-4 rounded w-1/2 mb-3"></div>
-                  <div className="bg-gray-200 h-6 w-20 rounded-full"></div>
-                </div>
+      <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
+        {Array.from({ length: 6 }).map((_, i) => (
+          <li key={i} className="animate-pulse">
+            <div className="bg-white rounded-lg shadow-md overflow-hidden">
+              <div className="bg-gray-200 h-48 sm:h-56 md:h-64 w-full"></div>
+              <div className="p-4 sm:p-6">
+                <div className="bg-gray-200 h-5 sm:h-6 rounded mb-2"></div>
+                <div className="bg-gray-200 h-4 rounded w-3/4 mb-2"></div>
+                <div className="bg-gray-200 h-4 rounded w-1/2 mb-3"></div>
+                <div className="bg-gray-200 h-5 sm:h-6 w-20 rounded-full"></div>
               </div>
-            </li>
-          ))}
-        </ul>
-      </div>
+            </div>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
+
+
