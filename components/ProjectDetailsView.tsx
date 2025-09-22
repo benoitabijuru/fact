@@ -236,6 +236,7 @@ const ProjectDetailView: React.FC<ProjectDetailViewProps> = ({ project, allProje
               <p className='text-white'>FACT</p>
             </Link>
             
+            
           </div>
         </div>
       </div>

@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 
@@ -16,9 +17,15 @@ const TopBar = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link href="/" className="text-2xl font-bold text-gray-900 hover:text-gray-700 transition-colors">
-              FACT
+            <Link href="/" className="">
+              <Image
+              src="/assets/logo.jpg"
+              width={100}
+              height={100}
+              alt="FACT Logo"
+              />
             </Link>
+
           </div>
 
           {/* Desktop Navigation */}

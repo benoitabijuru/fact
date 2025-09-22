@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import SocialsLinks from './SocialsLinks';
+import Image from 'next/image';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -13,9 +14,14 @@ const Footer = () => {
           {/* Brand Section */}
           <div className="lg:col-span-1">
             <div className="mb-6">
-              <h2 className="text-4xl font-bold text-white bg-clip-text ">
-                FACT
-              </h2>
+                <Link href="/" className="">
+                            <Image
+                            src="/assets/logo.jpg"
+                            width={100}
+                            height={100}
+                            alt="FACT Logo"
+                            />
+                          </Link>
               <p className="text-gray-300 mt-4 text-sm leading-relaxed">
                 A leading Rwandan-based architecture firm crafting innovative spaces that blend modern design with cultural heritage.
               </p>
