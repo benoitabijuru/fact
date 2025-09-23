@@ -61,7 +61,7 @@ const AboutUsPage = () => {
             className="text-5xl md:text-7xl font-thin mb-8 tracking-wide"
             variants={fadeInUp}
           >
-            About <span className="font-light italic">Fact Ltd</span> Studio
+            About <span className="font-light italic">Fact Group</span> 
           </motion.h1>
           <motion.div 
             className="w-24 h-0.5 bg-black mx-auto mb-8"
@@ -377,7 +377,7 @@ const AboutUsPage = () => {
         <div className="grid md:grid-cols-3 gap-8">
           {[
             { name: " Jean De Dieu Manishimwe", role: "Principal Architect & Co-Founder", desc: "With over 5 years of experience, Manishimwe leads our design vision and ensures every project reflects our commitment to excellence." },
-            { name: " Jean claude Nsanimana", role: "Design Director", desc: "Nsanimana brings innovative design thinking and technical expertise to every project, ensuring form and function work in perfect harmony." },
+            { name: " Jean claude Nsabimana", role: "Design Director", desc: "Nsabimana brings innovative design thinking and technical expertise to every project, ensuring form and function work in perfect harmony." },
             { name: "Engr Honore", role: "Principal Engineer & Co-Founder", desc: "Honore's technical acumen and leadership champions our environmental initiatives, ensuring every project contributes to a more sustainable future." }
           ].map((member, index) => (
             <motion.div 

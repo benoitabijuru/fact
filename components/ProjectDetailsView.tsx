@@ -19,6 +19,7 @@ const ProjectDetailView: React.FC<ProjectDetailViewProps> = ({ project, allProje
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(false);
+  const [showNavButtons, setShowNavButtons] = useState(false);
   const autoPlayRef = useRef<NodeJS.Timeout | null>(null);
 
   const getCurrentContent = () => {
@@ -189,6 +190,12 @@ const ProjectDetailView: React.FC<ProjectDetailViewProps> = ({ project, allProje
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [currentView, project, isAutoPlaying]);
 
+  // Check if we should show navigation buttons
+  const shouldShowNavButtons = () => {
+    const content = getCurrentContent();
+    return (currentView === 'photos' || currentView === 'diagrams') && content.length > 1;
+  };
+
   return (
     <div className="fixed inset-0 bg-black text-black z-50">
       {/* Header Controls */}
@@ -235,8 +242,6 @@ const ProjectDetailView: React.FC<ProjectDetailViewProps> = ({ project, allProje
             <Link href="/" className="p-2 bg-slate-900 hover:bg-white/30 rounded-full transition-all hover:text-black">
               <p className='text-white'>FACT</p>
             </Link>
-            
-            
           </div>
         </div>
       </div>
@@ -244,7 +249,11 @@ const ProjectDetailView: React.FC<ProjectDetailViewProps> = ({ project, allProje
       {/* Main Content Area */}
       <div className="w-full h-full grid grid-cols-1 md:grid-cols-3 gap-0">
         {/* Left Side - Image/Content Area (2/3) */}
-        <div className="col-span-2 relative h-64 sm:h-96 md:h-full">
+        <div 
+          className="col-span-2 relative h-64 sm:h-96 md:h-full"
+          onMouseEnter={() => setShowNavButtons(true)}
+          onMouseLeave={() => setShowNavButtons(false)}
+        >
           <AnimatePresence mode="wait">
             {currentView === 'overview' && (
               <motion.div
@@ -315,6 +324,47 @@ const ProjectDetailView: React.FC<ProjectDetailViewProps> = ({ project, allProje
               </motion.div>
             )}
           </AnimatePresence>
+
+          {/* Instagram-style Navigation Buttons */}
+          {shouldShowNavButtons() && (
+            <AnimatePresence>
+              {(showNavButtons || window.innerWidth <= 768) && (
+                <>
+                  {/* Left Navigation Button */}
+                  <motion.button
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    onClick={prevSlide}
+                    className="absolute left-4 top-1/2 transform -translate-y-1/2 z-50 
+                               w-10 h-10 bg-white/20 hover:bg-white/30 backdrop-blur-sm
+                               rounded-full flex items-center justify-center
+                               transition-all duration-200 hover:scale-110
+                               md:w-12 md:h-12"
+                  >
+                    <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 text-white" />
+                  </motion.button>
+
+                  {/* Right Navigation Button */}
+                  <motion.button
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    onClick={nextSlide}
+                    className="absolute right-4 top-1/2 transform -translate-y-1/2 z-50
+                               w-10 h-10 bg-white/20 hover:bg-white/30 backdrop-blur-sm
+                               rounded-full flex items-center justify-center
+                               transition-all duration-200 hover:scale-110
+                               md:w-12 md:h-12"
+                  >
+                    <ChevronRight className="w-5 h-5 md:w-6 md:h-6 text-white" />
+                  </motion.button>
+                </>
+              )}
+            </AnimatePresence>
+          )}
         </div>
 
         {/* Right Side - Content Panel (1/3) */}
@@ -458,22 +508,6 @@ const ProjectDetailView: React.FC<ProjectDetailViewProps> = ({ project, allProje
               <div className="flex items-center justify-between mb-4">
                 <div className="text-sm opacity-80">
                   {currentSlideIndex + 1} / {getCurrentContent().length}
-                </div>
-                
-                <div className="flex items-center space-x-2">
-                  <button
-                    onClick={prevSlide}
-                    className="p-2 bg-gray-100 hover:bg-gray-200 rounded-full transition-all"
-                  >
-                    <ChevronLeft className="w-4 h-4 text-black" />
-                  </button>
-                  
-                  <button
-                    onClick={nextSlide}
-                    className="p-2 bg-gray-100 hover:bg-gray-200 rounded-full transition-all"
-                  >
-                    <ChevronRight className="w-4 h-4 text-black" />
-                  </button>
                 </div>
               </div>
               
