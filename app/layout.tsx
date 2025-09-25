@@ -5,9 +5,10 @@ import Footer from "@/components/Footer";
 import {
   ClerkProvider,
 } from '@clerk/nextjs'
+import { Analytics } from '@vercel/analytics/next';
 
 export const metadata: Metadata = {
-  title: "Fact ltd",
+  title: "Fact",
   description: "A leading Rwandan-based architecture firm crafting innovative spaces that blend modern design with cultural heritage.",
 };
 
@@ -31,6 +32,7 @@ export default function RootLayout({
         {/* Main content area that grows to fill available space */}
         <main className="flex-1 overflow-auto">
           {children}
+          <Analytics/>
         </main>
         
         {/* Footer always at bottom */}
