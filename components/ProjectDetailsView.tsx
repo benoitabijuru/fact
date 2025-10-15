@@ -386,17 +386,7 @@ const ProjectDetailView: React.FC<ProjectDetailViewProps> = ({ project, allProje
                 <span>Overview</span>
               </button>
               
-              <button
-                onClick={() => switchView('photos')}
-                className={`flex items-center space-x-2 sm:px-4 px-3 sm:py-3 py-2 rounded-lg text-left transition-all ${
-                  currentView === 'photos' 
-                    ? 'bg-slate-900 text-white' 
-                    : 'bg-gray-100 text-black hover:bg-gray-200'
-                }`}
-              >
-                <Image className="w-4 h-4" />
-                <span>Photos</span>
-              </button>
+              
               
                <button
                 onClick={() => switchView('diagrams')}
@@ -408,6 +398,17 @@ const ProjectDetailView: React.FC<ProjectDetailViewProps> = ({ project, allProje
               >
                 <FileText className="w-4 h-4" />
                 <span>Diagrams</span>
+              </button>
+              <button
+                onClick={() => switchView('photos')}
+                className={`flex items-center space-x-2 sm:px-4 px-3 sm:py-3 py-2 rounded-lg text-left transition-all ${
+                  currentView === 'photos' 
+                    ? 'bg-slate-900 text-white' 
+                    : 'bg-gray-100 text-black hover:bg-gray-200'
+                }`}
+              >
+                <Image className="w-4 h-4" />
+                <span>Photos</span>
               </button>
               
             </div>

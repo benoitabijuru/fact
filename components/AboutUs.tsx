@@ -76,7 +76,23 @@ const AboutUsPage = () => {
             className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed mb-12"
             variants={fadeInUp}
           >
-           We are passionate architects, urban planners, landscapers, engineers, designers, historians, psychologists, sociologists, materials specialists, project managers, community engagement specialists, cultural consultants and scientists—united in shaping spaces that inspire, elevate the human experience, and stand the test of time. With beauty, purpose, and innovation at our core, we create environments that nurture well-being, honor culture, advance technology, and embrace sustainability. Every project we undertake enriches the built environment and uplifts the communities it serves.
+          Because the world doesn’t just need buildings.
+It needs meaning.
+It needs spaces that breathe, connect, and inspire.
+
+FACT(Focus on Architecture, Construction, and Technology) is not just a company, it’s a movement.
+We are architects, planners, engineers, scientists, and dreamers.
+We design not to decorate life, but to shape it.
+To make every line, every material, every idea serve both beauty and purpose.
+
+We build with culture in mind.
+We innovate with technology at hand.
+We create for people-today, tomorrow, and generations to come.
+
+Every project we touch uplifts a community.
+Every design we imagine elevates the human experience.
+And every structure we complete stands as proof:
+That when you focus on Architecture, Construction, and Technology-you’re not just building spaces, You’re building the future.
           </motion.p>
           
           <motion.div 
@@ -155,7 +171,7 @@ const AboutUsPage = () => {
               transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
             >
               <Image 
-                src="https://media.licdn.com/dms/image/v2/D4E22AQERk-ypngMUvg/feedshare-shrink_800/feedshare-shrink_800/0/1731516513593?e=1758758400&v=beta&t=-jEKra3oHl5S3OvvnyyP0X2HnJDiMNpPY3hr0_3rwDg" 
+                src="/assets/photo5.jpg"
                 alt="Architectural interior design"
                 fill
                 className="object-cover rounded-lg shadow-xl transition-all duration-700 hover:shadow-2xl"
@@ -297,8 +313,8 @@ const AboutUsPage = () => {
               transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
             >
               <Image 
-                src="https://media.licdn.com/dms/image/v2/D4E22AQGNlj8tGffHcg/feedshare-shrink_800/feedshare-shrink_800/0/1731516569893?e=1758758400&v=beta&t=vQhsT90UCWSmo2DNp6WD8oxx3kgjVNP-xHSOBvdpysc" 
-                alt="Architectural workspace and design process"
+                src="/assets/photo1.jpg"
+                alt="one photo of FACT work"
                 fill
                 className="object-cover rounded-lg shadow-xl transition-all duration-700 hover:shadow-2xl"
               />

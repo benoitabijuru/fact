@@ -81,7 +81,7 @@ const ContactForm: React.FC = () => {
               <div className=" hover:scale-105 h-full">
             
                  <Image 
-                                src="https://media.licdn.com/dms/image/v2/D4E22AQERk-ypngMUvg/feedshare-shrink_2048_1536/feedshare-shrink_2048_1536/0/1731516513707?e=1758758400&v=beta&t=ms1eDmmtYbP8t5nlekSDjyUafT1qJhEXZVZd3OCLFBo" 
+                                src="/assets/photo4.jpg" 
                                 alt="Architectural workspace and design process"
                                  width={500}
                                 height={500}
