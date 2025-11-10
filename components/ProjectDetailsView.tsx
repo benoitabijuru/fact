@@ -100,7 +100,7 @@ const ProjectDetailView: React.FC<ProjectDetailViewProps> = ({ project, allProje
     
     autoPlayRef.current = setInterval(() => {
       nextSlide();
-    }, 4000);
+    }, 1000);
     
     setIsAutoPlaying(true);
   };
@@ -130,7 +130,7 @@ const ProjectDetailView: React.FC<ProjectDetailViewProps> = ({ project, allProje
     
     // Auto-start autoplay when switching to diagrams
     if (newView === 'diagrams' && project.project_diagrams && project.project_diagrams.length > 1) {
-      setTimeout(() => startAutoPlay(), 500);
+      setTimeout(() => startAutoPlay(), 1000);
     }
   };
 
@@ -197,7 +197,7 @@ const ProjectDetailView: React.FC<ProjectDetailViewProps> = ({ project, allProje
   };
 
   return (
-    <div className="fixed inset-0 bg-black text-black z-50">
+    <div className="fixed inset-0 bg-white text-black z-50">
       {/* Header Controls */}
       <div className="absolute top-0 left-0 right-0 z-60 bg-gradient-to-b from-black/50 to-transparent p-6">
         <div className="flex items-center justify-between">
@@ -258,7 +258,7 @@ const ProjectDetailView: React.FC<ProjectDetailViewProps> = ({ project, allProje
             {currentView === 'overview' && (
               <motion.div
                 key="overview"
-                className="w-full h-full flex items-center justify-center bg-black"
+                className="w-full h-full flex items-center justify-center "
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
@@ -275,10 +275,8 @@ const ProjectDetailView: React.FC<ProjectDetailViewProps> = ({ project, allProje
             {currentView === 'photos' && (
               <motion.div
                 key={`photos-${currentSlideIndex}`}
-                className="w-full h-full flex items-center justify-center bg-black"
-                initial={{ opacity: 0, x: -100 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 100 }}
+                className="w-full h-full flex items-center justify-center bg-black "
+                
                 transition={{ duration: 0.5, ease: "easeOut" }}
                 onTouchStart={handleTouchStart}
                 onTouchMove={handleTouchMove}
@@ -301,11 +299,7 @@ const ProjectDetailView: React.FC<ProjectDetailViewProps> = ({ project, allProje
             {currentView === 'diagrams' && (
               <motion.div
                 key={`diagrams-${currentSlideIndex}`}
-                className="w-full h-full flex items-center justify-center bg-black"
-                initial={{ opacity: 0, x: -100 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 100 }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
+                className="w-full h-full flex items-center justify-center "
                 onTouchStart={handleTouchStart}
                 onTouchMove={handleTouchMove}
                 onTouchEnd={handleTouchEnd}
